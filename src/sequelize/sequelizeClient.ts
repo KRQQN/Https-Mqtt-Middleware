@@ -1,6 +1,7 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 import TrackerDevice from './models/trackerDeviceModel.ts';
-import EdgeDevice from './models/edgeDeviceModel.ts';
+import EDGEDevice from './models/edgeDeviceModel.ts';
+import 'dotenv/config'
 
 export async function getSequelizeClient () {
   const sequelizeClient = new Sequelize({
@@ -10,7 +11,7 @@ export async function getSequelizeClient () {
     password: process.env.DB_PASSWORD,
     port    : process.env.DB_PORT,
     models  : [
-      EdgeDevice,
+      EDGEDevice,
       TrackerDevice
     ],
   } as SequelizeOptions);
