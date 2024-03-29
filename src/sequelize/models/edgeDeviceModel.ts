@@ -21,7 +21,7 @@ class EDGEDevice extends Model {
   type!: string;
 
   @Column({ type: DataType.TEXT })
-  hardware_adress!: string;
+  hardware_address!: string;
 
   @Column({ type: DataType.TEXT })
   ip_address!: string;
