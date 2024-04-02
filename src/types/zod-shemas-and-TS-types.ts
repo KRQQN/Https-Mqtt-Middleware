@@ -38,3 +38,8 @@ export const serverCredentialsSchema = z.object({
   nuxt : loginCredentialsSchema,
   admin: loginCredentialsSchema,
 });
+
+export const scanFilterSchema = z.object({
+  filter_key  : z.string(),
+  filter_value: z.string(),
+});
