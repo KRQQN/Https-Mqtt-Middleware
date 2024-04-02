@@ -43,3 +43,8 @@ export const scanFilterSchema = z.object({
   filter_key  : z.string(),
   filter_value: z.string(),
 });
+
+export const edgeDeviceSettingsSchema = z.object({
+  setting_key  : z.string(),
+  setting_value: z.string(),
+});
