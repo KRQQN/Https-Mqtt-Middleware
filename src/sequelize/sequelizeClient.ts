@@ -5,14 +5,19 @@ import 'dotenv/config'
 import TrackerDeviceData from './models/trackerDeviceDataModel.ts';
 import EDGEDeviceSettings from './models/edgeDeviceSettingsModel.ts';
 import DeviceTrack from './models/deviceTrackModel.ts';
+import { sequelizeConfSchema } from '../types/zod-shemas-and-TS-types.ts';
 
-export async function getSequelizeClient () {
+const { DB_DATABASE, DB_DIALECT, DB_USERNAME, DB_PASSWORD, DB_PORT } =
+  sequelizeConfSchema.parse(process.env);
+
+export async function getSequelizeClient() {
   const sequelizeClient = new Sequelize({
-    database: process.env.DB_DATABASE,
-    dialect : process.env.DB_DIALECT,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    port    : process.env.DB_PORT,
+    database: DB_DATABASE,
+    dialect : DB_DIALECT,
+    username: DB_USERNAME,
+    password: DB_PASSWORD,
+    port    : DB_PORT,
+    logging : () => null,    //! Implement for production
     models  : [
       EDGEDevice,
       TrackerDevice,
