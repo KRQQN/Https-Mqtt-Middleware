@@ -1,20 +1,30 @@
 import express from 'express';
 import { getSequelizeClient } from './sequelize/sequelizeClient.ts';
 import 'dotenv/config'
+import mqttClientProvider from './middleware/mqttClient.ts';
+import edgeRouter from './routes/edge/edgeRouter.ts';
+import path from 'path';
+import { readSQLFile } from './utils/sqlReader.ts';
+
+const port = 3000;
+const app = express();
+
 
 try {
-  const sequelizer = getSequelizeClient()
-  const s = await sequelizer;
-  await s.authenticate();
-  console.log('\x1b[32mConnected\x1b[0m  to database');
+  const sequelize = await getSequelizeClient()
+  // testdata
+  const sqlFilePath = path.join(process.cwd(), 'seed.sql');
+  const sql = await readSQLFile(sqlFilePath) as string
+  await sequelize.query(sql);
+
 } catch (error) {
   console.log('Unable to connect to the database', error);
   process.exit(1);
 }
 
-const app = express();
 app.use(express.json());
-const port = 3000;
+app.use(mqttClientProvider)
+app.use('/edge', edgeRouter)
 
 app.listen(port, () => {
   console.log(`Listening to port: ${port}!`);
