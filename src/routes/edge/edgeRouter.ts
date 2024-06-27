@@ -1,5 +1,7 @@
 import express from 'express';
 import authenticateToken from '../../middleware/jwtValidator.ts';
+import edgeSettingsHandler from '../../handlers/edgeSettingsHandler.ts';
+import edgeStartPubHandler from '../../handlers/edgeStartPubHandler.ts';
 
 // Router is used to group routes into modular units.
 const edgeRouter = express.Router();

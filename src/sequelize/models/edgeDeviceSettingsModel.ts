@@ -6,6 +6,7 @@ import {
   ForeignKey,
   BelongsTo,
   DataType,
+  AutoIncrement,
 } from 'sequelize-typescript';
 import EDGEDevice from './edgeDeviceModel.ts';
 
@@ -13,7 +14,8 @@ import EDGEDevice from './edgeDeviceModel.ts';
 class EDGEDeviceSettings extends Model {
   
   @PrimaryKey
-  @Column({ type: DataType.INTEGER })
+  @AutoIncrement
+  @Column({ type: DataType.INTEGER.UNSIGNED })
   id!: number;
 
   @ForeignKey(() => EDGEDevice)

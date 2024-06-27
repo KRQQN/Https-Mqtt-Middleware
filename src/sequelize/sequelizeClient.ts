@@ -23,5 +23,7 @@ export async function getSequelizeClient() {
     ],
   } as SequelizeOptions);
 
-  return await sequelizeClient.sync({ force: true });
+  sequelizeClient.sync({ force: true });
+  
+  return sequelizeClient;
 }
